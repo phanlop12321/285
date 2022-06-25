@@ -48,7 +48,7 @@ if (!$_SESSION["UserID"]) {  //check session
 
   $user = $_SESSION["User"];
   $id = $_SESSION["ID"];
-  
+
 
 
 
@@ -110,6 +110,18 @@ if (!$_SESSION["UserID"]) {  //check session
 
       #form5 {
         background-image: url("img/form5.png");
+      }
+
+      /* Chrome, Safari, Edge, Opera */
+      input::-webkit-outer-spin-button,
+      input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
+
+      /* Firefox */
+      input[type=number] {
+        -moz-appearance: textfield;
       }
     </style>
   </head>
@@ -214,55 +226,55 @@ if (!$_SESSION["UserID"]) {  //check session
         <br>
       </div>
       <?php
-        if (is_array($row3)) {
+      if (is_array($row3)) {
 
-      $sql4 = "SELECT * FROM wbs WHERE  id = $id AND ( user = '$user' )";
-      $result4 = $conn->query($sql4);
-      $result5 = $conn->query($sql4);
-      $result6 = $conn->query($sql4);
-      $row5 = $result5->fetch_assoc();
+        $sql4 = "SELECT * FROM wbs WHERE  id = $id AND ( user = '$user' )";
+        $result4 = $conn->query($sql4);
+        $result5 = $conn->query($sql4);
+        $result6 = $conn->query($sql4);
+        $row5 = $result5->fetch_assoc();
 
 
 
 
       ?>
 
-      <div class="container" id="WBS">
-        <form class="shadow p-3 mb-5 bg-body rounded" action="addwbs.php" method="POST">
-          <div class="form-group col">
-            <div class="row">
-              <div class="form-group col-md-4">
-                <label>WBS</label>
-                <?php if (is_array($row5)) { ?>
-                  <input type="text" class="form-control" value="<?= $row5["WBS"]; ?>" disabled>
-                  <input type="hidden" name="wbs" value="<?= $row5["WBS"]; ?>">
-                <?php } else { ?>
+        <div class="container" id="WBS">
+          <form class="shadow p-3 mb-5 bg-body rounded" action="addwbs.php" method="POST">
+            <div class="form-group col">
+              <div class="row">
+                <div class="form-group col-md-4">
+                  <label>WBS</label>
+                  <?php if (is_array($row5)) { ?>
+                    <input type="text" class="form-control" value="<?= $row5["WBS"]; ?>" disabled>
+                    <input type="hidden" name="wbs" value="<?= $row5["WBS"]; ?>">
+                  <?php } else { ?>
 
-                  <input type="text" class="form-control" name="wbs" placeholder="กรุณาใส่ WBS" required>
-                <?php } ?>
-              </div>
-              <div class="form-group col-md-4">
-                <label>รหัสเครือข่าย</label>
-                <input type="text" class="form-control" name="network" placeholder="กรุณาใส่ รหัสเครือข่าย" required>
-              </div>
-              <div class="form-group col-md-2">
-                <label>กิจกรรม</label>
-                <input type="text" class="form-control" name="activity" placeholder="กรุณาใส่ กิจกรรม" required>
-              </div>
-              <div class="form-group col-md-2">
-                <br>
-                <button type="submit" class="btn btn-outline-primary" style="margin: 20px;">เพิ่ม</button>
-              </div>
-              <?php if (is_array($row5)) { ?>
-                <div class="form-group col-md-2">
-                  <a href="del_wbs.php?wbs=<?= $row5["WBS"]; ?>&NETWORK=<?= $row5["NETWORK"]; ?>&id=<?= $row5['id']; ?>" style="color: red; " onclick="return confirm('ยืนยันการลบข้อมูล !!');">ลบ WBS</a>
+                    <input type="text" class="form-control" name="wbs" placeholder="กรุณาใส่ WBS" required>
+                  <?php } ?>
                 </div>
-              <?php } ?>
+                <div class="form-group col-md-4">
+                  <label>รหัสเครือข่าย</label>
+                  <input type="text" class="form-control" name="network" placeholder="กรุณาใส่ รหัสเครือข่าย" required>
+                </div>
+                <div class="form-group col-md-2">
+                  <label>กิจกรรม</label>
+                  <input type="text" class="form-control" name="activity" placeholder="กรุณาใส่ กิจกรรม" required>
+                </div>
+                <div class="form-group col-md-2">
+                  <br>
+                  <button type="submit" class="btn btn-outline-primary" style="margin: 20px;">เพิ่ม</button>
+                </div>
+                <?php if (is_array($row5)) { ?>
+                  <div class="form-group col-md-2">
+                    <a href="del_wbs.php?wbs=<?= $row5["WBS"]; ?>&NETWORK=<?= $row5["NETWORK"]; ?>&id=<?= $row5['id']; ?>" style="color: red; " onclick="return confirm('ยืนยันการลบข้อมูล !!');">ลบ WBS</a>
+                  </div>
+                <?php } ?>
 
+              </div>
             </div>
-          </div>
-      </div>
-      </form>
+        </div>
+        </form>
     </div>
 
 
@@ -322,20 +334,20 @@ if (!$_SESSION["UserID"]) {  //check session
 
       <?php } ?>
       <?php
-      while ($row4 = $result4->fetch_assoc()) {
+        while ($row4 = $result4->fetch_assoc()) {
 
 
 
-        if (is_array($row4)) {
+          if (is_array($row4)) {
 
 
 
-          $NETWORK = $row4["NETWORK"];
+            $NETWORK = $row4["NETWORK"];
 
 
 
-          $sql = "SELECT * FROM end_data WHERE network =  $NETWORK  ";
-          $result = $conn->query($sql);
+            $sql = "SELECT * FROM end_data WHERE network =  $NETWORK  ";
+            $result = $conn->query($sql);
       ?>
 
           <div>
@@ -424,8 +436,8 @@ if (!$_SESSION["UserID"]) {  //check session
             </table>
           </div>
       <?php
-        }
-      } ?>
+          }
+        } ?>
     </div>
 
 
@@ -440,16 +452,20 @@ if (!$_SESSION["UserID"]) {  //check session
         <br>
         <div class="form-group col-md-2 ">
           <label>รหัสพนักงาน</label>
-          <input type="number" class="form-control" name="ID_EMPLOYEE" placeholder="กรุณาใส่รหัสพนักงาน" value="<?php if (isset($row1["ID"])) {
-                                                                                                                  echo $row1["ID"];
-                                                                                                                } ?>" required>
+          <input type="number" onkeyup="serchEmployee('ID_EMPLOYEE')" class="form-control" name="ID_EMPLOYEE" placeholder="กรุณาใส่รหัสพนักงาน" value="<?php if (isset($row1["ID"])) {
+                                                                                                                                                          echo $row1["ID"];
+                                                                                                                                                        } ?>" required>
+          <span id="search_result_id" class="search_result">
+
+          </span>
         </div>
         <div class="row">
           <div class="form-group col-md-3">
             <label>ชื่อจริง</label>
-            <input type="text" class="form-control" name="FNAME" placeholder="กรุณาใส่ชื่อจริง" value="<?php if (isset($row1["Fname"])) {
-                                                                                                          echo $row1["Fname"];
-                                                                                                        } ?>" required>
+            <input type="text" onkeyup="serchEmployee('FNAME')" class="form-control" name="FNAME" placeholder="กรุณาใส่ชื่อจริง" value="<?php if (isset($row1["Fname"])) {
+                                                                                                                                          echo $row1["Fname"];
+                                                                                                                                        } ?>" required>
+            <span id="search_result_fname" class="search_result">
           </div>
           <div class="form-group col-md-3">
             <label>นามสกุล</label>
@@ -512,7 +528,121 @@ if (!$_SESSION["UserID"]) {  //check session
       </form>
       <br>
     </div>
+    <script>
+      let dataEmployees = [];
+      const headers = {
+        'Content-type': 'application/json; charset=UTF-8'
+      };
 
+      function serchEmployee(type) {
+        switch (type) {
+          case "ID_EMPLOYEE":
+            //request  -> find employee form id
+            const employeeId = document.getElementsByName('ID_EMPLOYEE')[0].value;
+            if (employeeId.length >= 4) {
+              fetchEmployeById(employeeId);
+            }
+
+            break;
+          case "FNAME":
+            const fName = document.getElementsByName('FNAME')[0].value;
+            if (fName.length >= 4) {
+              fetchEmployeByFName(fName);
+            }
+            break;
+          default:
+            console.log("default");
+            break;
+        }
+      }
+      const fetchEmployeByFName = (fName) => {
+
+        fetch("service/employee.php", { //ส่ง id เพื่อไป getdata employee
+          method: "POST",
+          body: JSON.stringify({ //encode json
+            fName: fName
+          }),
+          headers
+        }).then(function(response) {
+
+          return response.json();
+
+        }).then(function(responseData) {
+          console.log({
+            responseData
+          });
+          const html = autocomplete(responseData);
+          if (html != null) {
+            document.getElementById('search_result_fname').innerHTML = html;
+          }
+        });
+      };
+      const fetchEmployeById = (id) => {
+        console.log({
+          id
+        });
+        fetch("service/employee.php", { //ส่ง id เพื่อไป getdata employee
+          method: "POST",
+          body: JSON.stringify({ //encode json
+            id
+          }),
+          headers
+        }).then(function(response) {
+
+          return response.json();
+
+        }).then(function(responseData) {
+          console.log({
+            responseData
+          });
+
+          const html = autocomplete(responseData);
+          if (html != null) {
+            document.getElementById('search_result_id').innerHTML = html;
+          }
+
+        });
+      };
+      const autocomplete = (employees) => {
+        let html = null;
+        if (employees.length > 0) {
+          dataEmployees = employees;
+
+          html = '<ul class="list-group">';
+
+          html += '<li class="list-group-item d-flex justify-content-between align-items-center"><b class="text-primary"><i>Your Recent Searches</i></b></li>';
+          for (let count = 0; count < employees.length; count++) {
+
+            html += '<li class="list-group-item text-muted" style="cursor:pointer"  onclick="selectEmployee(' + count + ')"><i class="fas fa-history mr-3"></i><span>' + employees[count].Fname + '</span> <i class="far fa-trash-alt float-right mt-1" ></i></li>';
+
+          }
+          html += '</ul>';
+        }
+        return html
+      }
+
+      function selectEmployee(key) {
+        const employeeSelected = dataEmployees[key];
+
+        document.getElementsByName('ID_EMPLOYEE')[0].value = employeeSelected.ID
+        document.getElementsByName('FNAME')[0].value = employeeSelected.Fname
+        document.getElementsByName('LNAME')[0].value = employeeSelected.Lname
+        document.getElementsByName('RANK')[0].value = employeeSelected.Rank
+        document.getElementsByName('DEPARTMENT')[0].value = employeeSelected.Under
+        document.getElementsByName('FULLNAME')[0].value = employeeSelected.Department
+        document.getElementsByName('pea')[0].value = employeeSelected.pea
+        document.getElementsByName('county')[0].value = employeeSelected.county
+        document.getElementsByName('TEL')[0].value = employeeSelected.phone
+
+        const els = document.getElementsByClassName('search_result');
+        // document.getElementById('search_result_id').innerHTML = '';
+        Array.prototype.forEach.call(els, function(el) {
+          el.innerHTML = '';
+        });
+
+
+      }
+    </script>
     <div class="container" id="vender">
       <div class="col offset-md-5">
       </div>
@@ -816,14 +946,15 @@ if (!$_SESSION["UserID"]) {  //check session
       <br>
     </div>
 
-    <?php }?>
+  <?php } ?>
 
 
-    </div>
+  </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
-    <script src="assets/jquery.min.js"></script>
-    <script src="assets/script.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+  <script src="assets/jquery.min.js"></script>
+  <script src="assets/script.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   </body>
 
   </html>
